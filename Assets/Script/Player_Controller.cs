@@ -6,9 +6,8 @@ using UnityEngine;
 public class Player_Controller : MonoBehaviour
 {
     Rigidbody2D rb;
-    Animator PlayerAnimator;
 
-    Vector2 movement;
+    public Vector2 movement;
     Vector2 mousePos;
 
     [SerializeField] Camera cam;
@@ -17,7 +16,6 @@ public class Player_Controller : MonoBehaviour
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
-        PlayerAnimator = GetComponent<Animator>();
     }
 
     void Update()

@@ -12,7 +12,7 @@ TagManager:
   - Water
   - UI
   - Player
-  - 
+  - Item
   - 
   - 
   - 
@@ -41,11 +41,11 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: wall
-    uniqueID: 3015755521
-    locked: 0
   - name: ground
     uniqueID: 189748417
+    locked: 0
+  - name: wall
+    uniqueID: 3015755521
     locked: 0
   - name: props With Collider
     uniqueID: 3672277497
@@ -56,9 +56,12 @@ TagManager:
   - name: Deco Props 2
     uniqueID: 2592785739
     locked: 0
+  - name: Item
+    uniqueID: 1070052947
+    locked: 0
   - name: player
     uniqueID: 2612292265
     locked: 0
-  - name: New Layer 7
-    uniqueID: 255461287
+  - name: Camera
+    uniqueID: 3313278503
     locked: 0

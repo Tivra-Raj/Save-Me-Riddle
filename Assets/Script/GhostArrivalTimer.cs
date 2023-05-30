@@ -17,7 +17,7 @@ public class GhostArrivalTimer : MonoBehaviour
 
     private void Start()
     {
-        
+        Enemy.SetActive(false);
         totalTime = ghostArrivalTime + ghostDepartureTime;
         currenttime = totalTime;
     }

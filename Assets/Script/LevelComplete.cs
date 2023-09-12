@@ -1,10 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
+using Player;
 using UnityEngine;
 
 public class LevelComplete : MonoBehaviour
 {
-    [SerializeField] InteractionSystem interactionSystem;
     [SerializeField] GameObject Level_Complete_Menu;
 
     private void Start()
@@ -14,9 +12,9 @@ public class LevelComplete : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.GetComponent<Player_Controller>() != null)
+        if (collision.gameObject.GetComponent<PlayerView>() != null)
         {
-            if (interactionSystem.pickedItems.Count > 0)
+            if (PlayerService.Instance.PlayerController.PlayerView.pickedItems.Count > 0)
             {
                 Level_Complete_Menu.SetActive(true);
                 Debug.Log("level complete");

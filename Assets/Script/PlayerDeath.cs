@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+using Player;
 using UnityEngine;
 
 public class PlayerDeath : MonoBehaviour
@@ -13,7 +12,7 @@ public class PlayerDeath : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject.GetComponent<Player_Controller>() != null)
+        if(collision.gameObject.GetComponent<PlayerView>() != null)
         {
             gameOverUI.SetActive(true);
         }

@@ -6,11 +6,9 @@ namespace Player
     public class PlayerView : MonoBehaviour
     {
         private Rigidbody2D playerRigidBody;
-        public GameObject detectedObject;
-        public Transform ItemDetectionPoint;
 
-        
-        public bool isExamaning = false;
+        public Transform ItemDetectionPoint;
+        public GameObject DetectedObject;
 
         [Header("Picked Item List")]
         public List<GameObject> pickedItems = new List<GameObject>();
@@ -34,15 +32,6 @@ namespace Player
             PlayerController.HandlePlayerMovement();
         }
 
-        public void stopCoroutine(Coroutine coroutine)
-        {
-            if (coroutine != null)
-            {
-                StopCoroutine(coroutine);
-                coroutine = null;
-            }
-        }
-
-
+        private void OnCollisionEnter2D(Collision2D collision) => PlayerController?.OnPlayerCollidedWithGhost(collision.gameObject);
     }
 }

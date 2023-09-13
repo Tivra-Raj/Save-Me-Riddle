@@ -22,11 +22,17 @@ namespace Events
 
         public EventController<ItemScriptableObject> OnNoteExamineEvent { get; private set; }
 
+        public EventController OnPlayerEscapeEvent { get; private set; }
+
+        public EventController OnPlayerOpenDoorEvent { get; private set; }
+
 
         public EventService()
         {
             OnKeyPickedUpEvent = new EventController<GameObject>();
             OnNoteExamineEvent = new EventController<ItemScriptableObject>();
+            OnPlayerEscapeEvent = new EventController();
+            OnPlayerOpenDoorEvent = new EventController();
         }
     }
 }

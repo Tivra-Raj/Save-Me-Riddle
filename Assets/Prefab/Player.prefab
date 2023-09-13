@@ -365,7 +365,6 @@ GameObject:
   - component: {fileID: 1993627884522705873}
   - component: {fileID: 6212874672162905631}
   - component: {fileID: 799187138324888133}
-  - component: {fileID: 5050445907174526684}
   - component: {fileID: 4064730092496326005}
   m_Layer: 6
   m_Name: Player
@@ -516,29 +515,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.3125, y: 1.5625}
   m_EdgeRadius: 0
---- !u!114 &5050445907174526684
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6577405454352897584}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a0b47e297395e9a4599a938b085d1791, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  detectionPoint: {fileID: 2388740127114576865}
-  detectionLayer:
-    serializedVersion: 2
-    m_Bits: 128
-  detectedObject: {fileID: 0}
-  examineWindow: {fileID: 0}
-  examineImage: {fileID: 0}
-  examineText: {fileID: 0}
-  isExamaning: 0
-  countText: {fileID: 0}
-  pickedItems: []
 --- !u!114 &4064730092496326005
 MonoBehaviour:
   m_ObjectHideFlags: 0

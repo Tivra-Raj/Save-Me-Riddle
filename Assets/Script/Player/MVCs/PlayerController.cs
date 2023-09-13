@@ -1,5 +1,7 @@
-﻿using Events;
+﻿using Enemy;
+using Events;
 using InteractionSystems;
+using System.Collections.Generic;
 using UI;
 using UnityEngine;
 
@@ -16,6 +18,8 @@ namespace Player
         private Vector2 mousePos;
 
         private const float itemDetectionRadius = 0.3f;
+        private bool isExamaning = false;
+        public bool playerDead = false;
 
         public PlayerController(PlayerView playerPrefab, PlayerModel playerModel)
         {
@@ -62,6 +66,8 @@ namespace Player
 
         public void HandlePlayerMovement()
         {
+            if(playerDead) return;
+
             playerRigidbody.MovePosition(playerRigidbody.position + movement * PlayerModel.Speed * Time.fixedDeltaTime);
 
             Vector2 lookDir = mousePos - playerRigidbody.position;
@@ -80,7 +86,7 @@ namespace Player
             {
                 if (InteractInput())
                 {
-                    PlayerView.detectedObject.GetComponent<IInteractable>().Interact();
+                    PlayerView.DetectedObject.GetComponent<IInteractable>().Interact();
                 }
             }
         }
@@ -96,37 +102,50 @@ namespace Player
 
             if (collider != null)
             {
-                PlayerView.detectedObject = collider.gameObject;
+                PlayerView.DetectedObject = collider.gameObject;
                 return true;
             }
             else
             {
-                PlayerView.detectedObject = null;
+                PlayerView.DetectedObject = null;
                 return false;
             }
+        }
+
+        public List<GameObject> GetPickedUpItem()
+        {
+            return PlayerView.pickedItems;
         }
 
         public void PickUpItem(GameObject item)
         {
             PlayerView.pickedItems.Add(item);
-            UIService.Instance.countText.text = "" + PlayerView.pickedItems.Count;
+            GameUIService.Instance.countText.text = "" + PlayerView.pickedItems.Count;
         }
 
         public void ExamineItem(ItemScriptableObject itemScriptableObject)
         {
-            if (PlayerView.isExamaning)
+            if (isExamaning)
             {
                 Time.timeScale = 1f;
-                UIService.Instance.examineWindow.SetActive(false);
-                PlayerView.isExamaning = false;
+                GameUIService.Instance.ConfigExamineWindow(null, null, false);
+                isExamaning = false;
             }
             else
             {
-                UIService.Instance.examineImage.sprite = itemScriptableObject.NoteSprite;
-                UIService.Instance.examineText.text = itemScriptableObject.DescriptionText;
-                UIService.Instance.examineWindow.SetActive(true);
+                GameUIService.Instance.ConfigExamineWindow(itemScriptableObject.NoteSprite, itemScriptableObject.DescriptionText, true);
                 Time.timeScale = 0f;
-                PlayerView.isExamaning = true;
+                isExamaning = true;
+            }
+        }
+
+        public void OnPlayerCollidedWithGhost(GameObject collidedGameObject)
+        {
+            if(collidedGameObject.GetComponent<GhostView>() != null)
+            {
+                playerDead = true;
+                playerRigidbody.bodyType = RigidbodyType2D.Static;
+                GameUIService.Instance.SetGameOverUIActive(true);
             }
         }
     }

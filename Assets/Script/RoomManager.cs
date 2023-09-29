@@ -1,14 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Rendering;
 
-public class RoomManager : MonoBehaviour
+public class RoomService : MonoBehaviour
 {
-    [SerializeField] Camera Roomcam;
+    [SerializeField] Camera roomCamera;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Roomcam.transform.position = transform.position;
+        roomCamera.transform.position = transform.position;
     }
 }

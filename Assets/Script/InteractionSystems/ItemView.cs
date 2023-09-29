@@ -4,7 +4,7 @@ using UnityEngine;
 namespace InteractionSystems
 {
     [RequireComponent(typeof(BoxCollider2D))]
-    public class ItemView : MonoBehaviour, IInteractable
+    public class ItemView : MonoBehaviour, IItemInteractable
     {
         [SerializeField] private ItemScriptableObject Notes;
 

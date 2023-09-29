@@ -380,8 +380,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6577405454352897584}
-  m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: 15.69, y: 1.5000001, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: -0.4158645, w: 0.9094266}
+  m_LocalPosition: {x: -42.698055, y: 20.93262, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -389,8 +389,8 @@ Transform:
   - {fileID: 3495447431567709776}
   - {fileID: 2388740127114576865}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
+  m_RootOrder: 11
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 274.773}
 --- !u!212 &1993627884522705873
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -527,7 +527,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6684282dee282444c904c4bc99f77876, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  detectedObject: {fileID: 0}
-  ItemDetectionPoint: {fileID: 2388740127114576865}
-  isExamaning: 0
+  ObjectDetectionPoint: {fileID: 2388740127114576865}
+  ObjectDetectionRadius: 1
+  DetectedObject: {fileID: 0}
+  DetectedArea: {fileID: 0}
   pickedItems: []

@@ -1,11 +1,19 @@
+using InteractionSystems;
 using Player;
+using Service;
 using UnityEngine;
 
 namespace Events
 {
-    public class PlayerEscapeEvent : MonoBehaviour
+    public class PlayerEscapeEvent : MonoBehaviour, IAreaInteractable
     {
         [SerializeField] private GameObject EscapeKey;
+
+        public void Interact()
+        {
+            throw new System.NotImplementedException();
+        }
+
         private void OnTriggerEnter2D(Collider2D collision)
         {
             if (collision.gameObject.GetComponent<PlayerView>() != null)
@@ -16,6 +24,14 @@ namespace Events
                     {
                         EventService.Instance.OnPlayerEscapeEvent.InvokeEvent();
                     }
+                    else
+                    {
+                        GameService.Instance.GetSoundView().PlaySoundEffects(Sound.SoundType.LockedDoor, false);
+                    }
+                }
+                else
+                {
+                    GameService.Instance.GetSoundView().PlaySoundEffects(Sound.SoundType.LockedDoor, false);
                 }
             }
         }

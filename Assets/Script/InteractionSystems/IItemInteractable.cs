@@ -1,6 +1,6 @@
 ﻿namespace InteractionSystems
 {
-    public interface IInteractable
+    public interface IItemInteractable
     {
         public void Interact(); 
     }

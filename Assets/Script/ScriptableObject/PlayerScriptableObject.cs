@@ -11,5 +11,6 @@ namespace ScriptableObjects
 
         [Header("Item Detection Parameters")]
         public LayerMask ItemDetectionLayer;
+        public LayerMask AreaDetectionLayer;
     }
 }

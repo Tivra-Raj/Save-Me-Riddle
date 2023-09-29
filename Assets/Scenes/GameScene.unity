@@ -382,7 +382,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 40958573}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2619d3950f4982c44aafbd0550a96ae7, type: 3}
   m_Name: 
@@ -931,7 +931,7 @@ MonoBehaviour:
   Enemy: {fileID: 40958573}
   timerDisplay: {fileID: 631821598}
   ghostArrivalTime: 30
-  ghostDepartureTime: 10
+  ghostDepartureTime: 20
 --- !u!4 &489292520
 Transform:
   m_ObjectHideFlags: 0
@@ -49350,8 +49350,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2039078092}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.06, y: 19.03, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
+  m_LocalPosition: {x: 15.69, y: 1.5000001, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -49360,7 +49360,7 @@ Transform:
   - {fileID: 1852226340}
   m_Father: {fileID: 0}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
 --- !u!50 &2039078096
 Rigidbody2D:
   serializedVersion: 4

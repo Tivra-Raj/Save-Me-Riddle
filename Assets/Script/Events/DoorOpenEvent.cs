@@ -1,13 +1,16 @@
-﻿using Player;
+﻿using InteractionSystems;
+using Player;
+using Service;
 using UnityEngine;
 
 namespace Events
 {
-    public class DoorOpenEvent : MonoBehaviour
+    public class DoorOpenEvent : MonoBehaviour, IAreaInteractable
     {
-        [SerializeField] private GameObject Room1Key;
-        [SerializeField] private GameObject Room2Key;
+        [SerializeField] private GameObject StudyRoomKey;
+        [SerializeField] private GameObject BedRoomKey;
         [SerializeField] private BoxCollider2D DoorCollider;
+        [SerializeField] private BoxCollider2D AreaInstructionCollider;
 
         private void OnEnable()
         {
@@ -25,10 +28,18 @@ namespace Events
             {
                 if (PlayerService.Instance.PlayerController.GetPickedUpItem().Count > 0)
                 {
-                    if (PlayerService.Instance.PlayerController.GetPickedUpItem().Find(item => item == Room1Key || item == Room2Key))
+                    if (PlayerService.Instance.PlayerController.GetPickedUpItem().Find(item => item == StudyRoomKey || item == BedRoomKey))
                     {
                         EventService.Instance.OnPlayerOpenDoorEvent.InvokeEvent();
                     }
+                    else
+                    {
+                        GameService.Instance.GetSoundView().PlaySoundEffects(Sound.SoundType.LockedDoor, false);
+                    }
+                }
+                else
+                {
+                    GameService.Instance.GetSoundView().PlaySoundEffects(Sound.SoundType.LockedDoor, false);
                 }
             }
         }
@@ -36,6 +47,12 @@ namespace Events
         private void OnDoorOpen()
         {
             DoorCollider.enabled = false;
+            AreaInstructionCollider.enabled = false;
+        }
+
+        public void Interact()
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

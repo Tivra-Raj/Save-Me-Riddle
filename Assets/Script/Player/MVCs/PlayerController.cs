@@ -1,8 +1,8 @@
 ﻿using Enemy;
 using Events;
 using InteractionSystems;
+using Service;
 using System.Collections.Generic;
-using UI;
 using UnityEngine;
 
 namespace Player
@@ -17,7 +17,6 @@ namespace Player
         private Vector2 movement;
         private Vector2 mousePos;
 
-        private const float itemDetectionRadius = 0.3f;
         private bool isExamaning = false;
         public bool playerDead = false;
 
@@ -70,7 +69,7 @@ namespace Player
 
             playerRigidbody.MovePosition(playerRigidbody.position + movement * PlayerModel.Speed * Time.fixedDeltaTime);
 
-            Vector2 lookDir = mousePos - playerRigidbody.position;
+            Vector2 lookDir = (mousePos - playerRigidbody.position).normalized;
             float angle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg;
             playerRigidbody.rotation = angle;
         }
@@ -86,9 +85,11 @@ namespace Player
             {
                 if (InteractInput())
                 {
-                    PlayerView.DetectedObject.GetComponent<IInteractable>().Interact();
+                    PlayerView.DetectedObject.GetComponent<IItemInteractable>().Interact();
                 }
             }
+
+            DetectArea();
         }
 
         private bool InteractInput()
@@ -98,7 +99,7 @@ namespace Player
 
         private bool DetectObject()
         {
-            Collider2D collider = Physics2D.OverlapCircle(PlayerView.ItemDetectionPoint.position, itemDetectionRadius, PlayerModel.ItemDetectionLayer);
+            Collider2D collider = Physics2D.OverlapCircle(PlayerView.ObjectDetectionPoint.position, PlayerView.ObjectDetectionRadius, PlayerModel.ItemDetectionLayer);            
 
             if (collider != null)
             {
@@ -112,6 +113,22 @@ namespace Player
             }
         }
 
+        private bool DetectArea()
+        {
+            Collider2D collider = Physics2D.OverlapCircle(PlayerView.ObjectDetectionPoint.position, PlayerView.ObjectDetectionRadius, PlayerModel.AreaDetectionLayer);
+
+            if (collider != null)
+            {
+                PlayerView.DetectedArea = collider.gameObject;
+                return true;
+            }
+            else
+            {
+                PlayerView.DetectedArea = null;
+                return false;
+            }
+        }
+
         public List<GameObject> GetPickedUpItem()
         {
             return PlayerView.pickedItems;
@@ -119,21 +136,25 @@ namespace Player
 
         public void PickUpItem(GameObject item)
         {
+            GameService.Instance.GetSoundView().PlaySoundEffects(Sound.SoundType.KeyPickUp, false);
             PlayerView.pickedItems.Add(item);
-            GameUIService.Instance.countText.text = "" + PlayerView.pickedItems.Count;
+            GameService.Instance.GetGameUIView().countText.text = "" + PlayerView.pickedItems.Count;
         }
 
         public void ExamineItem(ItemScriptableObject itemScriptableObject)
         {
             if (isExamaning)
             {
+                GameService.Instance.GetSoundView().PlaySoundEffects(Sound.SoundType.NotePickUp, false);
                 Time.timeScale = 1f;
-                GameUIService.Instance.ConfigExamineWindow(null, null, false);
+                GameService.Instance.GetGameUIView().ConfigExamineWindow(null, null, false);
                 isExamaning = false;
             }
             else
             {
-                GameUIService.Instance.ConfigExamineWindow(itemScriptableObject.NoteSprite, itemScriptableObject.DescriptionText, true);
+                GameService.Instance.GetSoundView().PlaySoundEffects(Sound.SoundType.NotePickUp, false);
+                GameService.Instance.GetInstructionView().HideInstruction();
+                GameService.Instance.GetGameUIView().ConfigExamineWindow(itemScriptableObject.NoteSprite, itemScriptableObject.DescriptionText, true);
                 Time.timeScale = 0f;
                 isExamaning = true;
             }
@@ -143,9 +164,10 @@ namespace Player
         {
             if(collidedGameObject.GetComponent<GhostView>() != null)
             {
+                GameService.Instance.GetSoundView().PlaySoundEffects(Sound.SoundType.PlayerDeath, false);
                 playerDead = true;
                 playerRigidbody.bodyType = RigidbodyType2D.Static;
-                GameUIService.Instance.SetGameOverUIActive(true);
+                GameService.Instance.GetGameUIView().SetGameMenuUIActive(true);
             }
         }
     }

@@ -10,12 +10,15 @@ namespace Player
         public PlayerController PlayerController { get; private set; }
         public LayerMask ItemDetectionLayer { get; private set; }
 
+        public LayerMask AreaDetectionLayer { get; private set; }
+
         public void SetPlayerController(PlayerController playerController) => PlayerController = playerController;
 
         public PlayerModel(PlayerScriptableObject playerScriptableObject)
         {
             Speed = playerScriptableObject.Speed;
             ItemDetectionLayer = playerScriptableObject.ItemDetectionLayer;
+            AreaDetectionLayer = playerScriptableObject.AreaDetectionLayer;
         }
     }
 }

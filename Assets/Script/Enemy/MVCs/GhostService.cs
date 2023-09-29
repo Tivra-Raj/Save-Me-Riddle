@@ -1,4 +1,7 @@
-﻿using ScriptableObjects;
+﻿using Player;
+using ScriptableObjects;
+using Service;
+using System.Collections;
 using TMPro;
 using UnityEngine;
 using Utilities;
@@ -10,14 +13,14 @@ namespace Enemy
         [SerializeField] private GhostScriptableObject ConfigGhost;
 
         [SerializeField] public BoxCollider2D GhostPatrolArea;
-        [SerializeField] TextMeshProUGUI timerDisplay;
-        [SerializeField] float ghostArrivalTime = 20;
-        [SerializeField] float ghostDepartureTime = 10;
+        [SerializeField] private TextMeshProUGUI timerDisplay;
+        [SerializeField] private float ghostArrivalTime = 20;
+        [SerializeField] private float ghostDepartureTime = 10;
 
-        float totalTime;
-        float currenttime;
-
-        bool isGhostSpwaned;
+        private float totalTime;
+        private float currenttime;
+        private bool isGhostSpwaned;
+        private Coroutine countDown;
 
         public GhostController GhostController { get; private set; }
 
@@ -25,7 +28,7 @@ namespace Enemy
         {
             CreateNewGhost();
             totalTime = ghostArrivalTime + ghostDepartureTime;
-            currenttime = totalTime;
+            currenttime = totalTime;    
         }
 
         private void Update()
@@ -45,6 +48,8 @@ namespace Enemy
 
         private void GhostVisibilty()
         {
+            if(PlayerService.Instance.PlayerController.playerDead) { return; }
+
             currenttime -= 1 * Time.deltaTime;
 
             if (currenttime < totalTime && currenttime > ghostDepartureTime)
@@ -56,17 +61,42 @@ namespace Enemy
                 timerDisplay.text = "Ghost Departure : " + (currenttime).ToString("0");
             }
 
-
             if (currenttime <= (totalTime - ghostArrivalTime) && !isGhostSpwaned)
             {
+                stopCoroutine(countDown);
                 isGhostSpwaned = true;
-                GhostController.GhostView.gameObject.SetActive(true);
+                GameService.Instance.GetSoundView().PlayBackgroundMusic(Sound.SoundType.GhostPresenceMusic, true);
+                countDown = StartCoroutine(SpwanGhost());
             }
             if (currenttime <= 0)
             {
+                stopCoroutine(countDown);
                 isGhostSpwaned = false;
-                GhostController.GhostView.gameObject.SetActive(false);
+                GameService.Instance.GetSoundView().PlaySoundEffects(Sound.SoundType.GhostOutgoing, false);
+                countDown = StartCoroutine(DeSpwanGhost());
                 currenttime = totalTime;
+            }
+        }
+
+        private IEnumerator SpwanGhost()
+        {
+            yield return new WaitForSeconds(2);
+            GhostController.GhostView.gameObject.SetActive(true);
+        }
+
+        private IEnumerator DeSpwanGhost()
+        {
+            GhostController.GhostView.gameObject.SetActive(false);
+            yield return new WaitForSeconds(2);
+            GameService.Instance.GetSoundView().PlayBackgroundMusic(Sound.SoundType.BackgroundMusic, true);
+        }
+
+        private void stopCoroutine(Coroutine coroutine)
+        {
+            if (coroutine != null)
+            {
+                StopCoroutine(coroutine);
+                coroutine = null;
             }
         }
     }

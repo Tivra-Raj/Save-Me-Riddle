@@ -14,7 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Speed: 4
   PlayerPrefab: {fileID: 4064730092496326005, guid: 1671fe76e344d1349bcaf673efb52819, type: 3}
-  ItemDetectionPoint: {fileID: 5386581259525361909, guid: 1671fe76e344d1349bcaf673efb52819, type: 3}
   ItemDetectionLayer:
     serializedVersion: 2
     m_Bits: 128
+  AreaDetectionLayer:
+    serializedVersion: 2
+    m_Bits: 512

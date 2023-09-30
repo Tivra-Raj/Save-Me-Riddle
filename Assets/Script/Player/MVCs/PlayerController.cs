@@ -79,6 +79,11 @@ namespace Player
             return movement;
         }
 
+        public Vector3 GetPlayerPosition()
+        {
+            return PlayerView.transform.position;
+        }
+
         public void HandlePlayerInteractInput()
         {
             if (DetectObject())
@@ -134,14 +139,14 @@ namespace Player
             return PlayerView.pickedItems;
         }
 
-        public void PickUpItem(GameObject item)
+        private void PickUpItem(GameObject item)
         {
             GameService.Instance.GetSoundView().PlaySoundEffects(Sound.SoundType.KeyPickUp, false);
             PlayerView.pickedItems.Add(item);
-            GameService.Instance.GetGameUIView().countText.text = "" + PlayerView.pickedItems.Count;
+            GameService.Instance.GetGameUIView().SetTotalKeyFoundedText(PlayerView.pickedItems.Count);
         }
 
-        public void ExamineItem(ItemScriptableObject itemScriptableObject)
+        private void ExamineItem(ItemScriptableObject itemScriptableObject)
         {
             if (isExamaning)
             {

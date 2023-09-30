@@ -87,7 +87,9 @@ namespace Enemy
         public void Attack()
         {
             if (playerMoved == true)
-                GhostView.transform.position = Vector2.MoveTowards(GhostView.transform.position, PlayerService.Instance.PlayerController.PlayerView.transform.position, GhostModel.Speed * Time.deltaTime);
+            {
+                GhostView.transform.position = Vector2.MoveTowards(GhostView.transform.position, PlayerService.Instance.PlayerController.GetPlayerPosition(), GhostModel.Speed * Time.deltaTime);
+            }
         }
     }
 }

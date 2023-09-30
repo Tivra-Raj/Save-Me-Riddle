@@ -12,9 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffcbe7168e2963c4eb24c693313dd856, type: 3}
   m_Name: GhostScriptableObject
   m_EditorClassIdentifier: 
-  Speed: 10
+  Speed: 20
   StartPatrolWaitTime: 4
-  GhostPatrolArea: {fileID: 7372705776806452526, guid: 2b8a3e949df8b9f49b7a3f43df157733, type: 3}
   PlayerLayerMask:
     serializedVersion: 2
     m_Bits: 64

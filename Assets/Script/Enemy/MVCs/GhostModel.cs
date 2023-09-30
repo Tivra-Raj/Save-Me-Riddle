@@ -7,7 +7,6 @@ namespace Enemy
     {
         public float Speed;
         public float StartPatrolWaitTime;
-        public BoxCollider2D GhostPatrolArea;
         public LayerMask PlayerLayerMask;
 
         public GhostController GhostController { get; private set; }
@@ -18,7 +17,6 @@ namespace Enemy
         {
             Speed = ghostScriptableObject.Speed;
             StartPatrolWaitTime = ghostScriptableObject.StartPatrolWaitTime;
-            GhostPatrolArea = ghostScriptableObject.GhostPatrolArea;
             PlayerLayerMask = ghostScriptableObject.PlayerLayerMask;
         }
     }

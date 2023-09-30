@@ -26,6 +26,10 @@ namespace Events
 
         public EventController OnPlayerOpenDoorEvent { get; private set; }
 
+        public EventController OnGhostSpawnedEvent { get; private set; }
+
+        public EventController OnGhostDeSpawnedEvent { get; private set; }
+
 
         public EventService()
         {
@@ -33,6 +37,8 @@ namespace Events
             OnNoteExamineEvent = new EventController<ItemScriptableObject>();
             OnPlayerEscapeEvent = new EventController();
             OnPlayerOpenDoorEvent = new EventController();
+            OnGhostSpawnedEvent = new EventController();
+            OnGhostDeSpawnedEvent = new EventController();
         }
     }
 }

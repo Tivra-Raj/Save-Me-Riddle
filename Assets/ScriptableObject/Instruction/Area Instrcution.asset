@@ -15,4 +15,4 @@ MonoBehaviour:
   InstructionType: 1
   StartInstruction: You Need
   EndInstruction: Key to Open
-  DisplayDuration: 3
+  DisplayDuration: 2

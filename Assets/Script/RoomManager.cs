@@ -1,3 +1,4 @@
+using Player;
 using UnityEngine;
 
 public class RoomService : MonoBehaviour
@@ -6,6 +7,7 @@ public class RoomService : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        roomCamera.transform.position = transform.position;
+        if(collision.gameObject.GetComponent<PlayerView>() != null)
+            roomCamera.transform.position = transform.position;
     }
 }

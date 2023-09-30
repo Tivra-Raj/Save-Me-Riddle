@@ -1502,7 +1502,7 @@ GameObject:
   - component: {fileID: 1842124178}
   - component: {fileID: 1842124177}
   m_Layer: 5
-  m_Name: SaveMeRiddleText
+  m_Name: StoryText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

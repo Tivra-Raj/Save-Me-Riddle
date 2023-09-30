@@ -1,8 +1,8 @@
-﻿using Player;
+﻿using Events;
+using Player;
 using ScriptableObjects;
 using Service;
 using System.Collections;
-using TMPro;
 using UnityEngine;
 using Utilities;
 
@@ -13,12 +13,13 @@ namespace Enemy
         [SerializeField] private GhostScriptableObject ConfigGhost;
 
         [SerializeField] public BoxCollider2D GhostPatrolArea;
-        [SerializeField] private TextMeshProUGUI timerDisplay;
         [SerializeField] private float ghostArrivalTime = 20;
         [SerializeField] private float ghostDepartureTime = 10;
 
         private float totalTime;
         private float currenttime;
+        private float originalGhostArrivalTime;
+        private float originalGhostDepartureTime;
         private bool isGhostSpwaned;
         private Coroutine countDown;
 
@@ -26,6 +27,9 @@ namespace Enemy
 
         private void Start()
         {
+            originalGhostArrivalTime = ghostArrivalTime;
+            originalGhostDepartureTime = ghostDepartureTime;
+
             CreateNewGhost();
             totalTime = ghostArrivalTime + ghostDepartureTime;
             currenttime = totalTime;    
@@ -33,7 +37,13 @@ namespace Enemy
 
         private void Update()
         {
+            
             GhostVisibilty();
+
+            if(PlayerService.Instance.PlayerController.GetPickedUpItem().Count == 3)
+            {
+                IncreaseDifficultyOnAllEscapeKeyCollected();
+            }
         }
 
         private GhostController CreateNewGhost()
@@ -52,13 +62,10 @@ namespace Enemy
 
             currenttime -= 1 * Time.deltaTime;
 
-            if (currenttime < totalTime && currenttime > ghostDepartureTime)
+            if (ghostArrivalTime + ghostDepartureTime != totalTime)
             {
-                timerDisplay.text = "Ghost Arrival : " + (currenttime - ghostDepartureTime).ToString("0");
-            }
-            else if (currenttime < ghostDepartureTime)
-            {
-                timerDisplay.text = "Ghost Departure : " + (currenttime).ToString("0");
+                totalTime = ghostArrivalTime + ghostDepartureTime;
+                currenttime = totalTime;
             }
 
             if (currenttime <= (totalTime - ghostArrivalTime) && !isGhostSpwaned)
@@ -75,21 +82,43 @@ namespace Enemy
                 GameService.Instance.GetSoundView().PlaySoundEffects(Sound.SoundType.GhostOutgoing, false);
                 countDown = StartCoroutine(DeSpwanGhost());
                 currenttime = totalTime;
+
+                if (ghostArrivalTime != originalGhostArrivalTime || ghostDepartureTime != originalGhostDepartureTime)
+                {
+                    ResetDifficulty();
+                }
             }
         }
 
         private IEnumerator SpwanGhost()
         {
+            EventService.Instance.OnGhostSpawnedEvent.InvokeEvent();
             yield return new WaitForSeconds(2);
             GhostController.GhostView.gameObject.SetActive(true);
         }
 
         private IEnumerator DeSpwanGhost()
-        {
+        {   
             GhostController.GhostView.gameObject.SetActive(false);
             yield return new WaitForSeconds(2);
+            EventService.Instance.OnGhostDeSpawnedEvent.InvokeEvent();
             GameService.Instance.GetSoundView().PlayBackgroundMusic(Sound.SoundType.BackgroundMusic, true);
         }
+
+        private void IncreaseDifficultyOnAllEscapeKeyCollected()
+        {
+            ghostArrivalTime = 12;
+            ghostDepartureTime = 12;
+        }
+
+        private void ResetDifficulty()
+        {
+            ghostArrivalTime = originalGhostArrivalTime;
+            ghostDepartureTime = originalGhostDepartureTime;
+            totalTime = ghostArrivalTime + ghostDepartureTime;
+            currenttime = totalTime;
+        }
+
 
         private void stopCoroutine(Coroutine coroutine)
         {

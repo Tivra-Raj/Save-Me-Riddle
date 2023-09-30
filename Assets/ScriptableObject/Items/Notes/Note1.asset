@@ -13,5 +13,8 @@ MonoBehaviour:
   m_Name: Note1
   m_EditorClassIdentifier: 
   Type: 1
-  DescriptionText: 'he cant see but his sense can found me '
+  DescriptionText: In the realm of fear, within these walls, A secret passage to
+    answer your calls.                                                                             
+    Where dreams and shadows softly confide, In the chamber's heart, your escape
+    does hide.
   NoteSprite: {fileID: 21300000, guid: 3760f58360ca58946a56fbd99ca2b18b, type: 3}

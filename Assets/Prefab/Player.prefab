@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7203781701411498056}
   - component: {fileID: 3581232726537760948}
   m_Layer: 6
-  m_Name: Light 2D
+  m_Name: Player Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -209,7 +209,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 3
+  m_Radius: 4
 --- !u!1 &5436216010044139666
 GameObject:
   m_ObjectHideFlags: 0
@@ -221,7 +221,7 @@ GameObject:
   - component: {fileID: 8000477803127059844}
   - component: {fileID: 801264500628040427}
   m_Layer: 6
-  m_Name: Light 2D
+  m_Name: Torch Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -330,6 +330,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3847332502585774233}
+  - component: {fileID: 4575397125801123107}
   m_Layer: 6
   m_Name: FOV
   m_TagString: Untagged
@@ -353,6 +354,25 @@ Transform:
   m_Father: {fileID: 5386581259525361909}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4575397125801123107
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5704328869204518851}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16128d80d8ca7fb47a57bfe4bc0ed296, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerLight: {fileID: 3581232726537760948}
+  torchLight: {fileID: 801264500628040427}
+  flickerDuration: 1.5
+  minIntensity: 0
+  maxIntensity: 1
+  setTorchMaxIntensity: 1
+  setPlayerLightIntensity: 0.2
 --- !u!1 &6577405454352897584
 GameObject:
   m_ObjectHideFlags: 0
@@ -389,7 +409,7 @@ Transform:
   - {fileID: 3495447431567709776}
   - {fileID: 2388740127114576865}
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 274.773}
 --- !u!212 &1993627884522705873
 SpriteRenderer:

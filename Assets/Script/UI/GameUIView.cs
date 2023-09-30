@@ -17,7 +17,7 @@ namespace UI
         [SerializeField] private TextMeshProUGUI examineText;
 
         [Header("Item Showcase")]
-        public TextMeshProUGUI countText;
+        [SerializeField] private TextMeshProUGUI KeyCountText;
 
         [Header("Game Over / Game Pause Parameters")]
         [SerializeField] private GameObject gameMenu;
@@ -81,6 +81,11 @@ namespace UI
             examineWindow.SetActive(examineWindowActiveStatus);
         }
 
+        public void SetTotalKeyFoundedText(int keyFoundedCount)
+        {
+            KeyCountText.SetText("" + keyFoundedCount);
+        }
+
         public void SetGameMenuUIActive(bool value)
         {
             gameMenu.SetActive(value);
@@ -90,7 +95,7 @@ namespace UI
         {
             PlayerService.Instance.PlayerController.playerDead = true;
             gameCompleteMenu.SetActive(true);
-            Invoke(nameof(LoadCreditScene), 3f);
+            Invoke(nameof(LoadCreditScene), 2.5f);
         }
 
         private void LoadCreditScene()

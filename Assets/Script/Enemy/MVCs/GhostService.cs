@@ -108,7 +108,7 @@ namespace Enemy
         private void IncreaseDifficultyOnAllEscapeKeyCollected()
         {
             ghostArrivalTime = 12;
-            ghostDepartureTime = 12;
+            ghostDepartureTime = 15;
         }
 
         private void ResetDifficulty()

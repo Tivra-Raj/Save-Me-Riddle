@@ -1382,7 +1382,7 @@ MonoBehaviour:
   ConfigGhost: {fileID: 11400000, guid: a08f87d8ec505bf46a0a52522bf60312, type: 2}
   GhostPatrolArea: {fileID: 1369376654807224957}
   ghostArrivalTime: 30
-  ghostDepartureTime: 40
+  ghostDepartureTime: 20
 --- !u!4 &451352880
 Transform:
   m_ObjectHideFlags: 0

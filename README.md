@@ -11,10 +11,10 @@
 # My Work
 
 -  A simple Horror-puzzled genre-based game.
-− Implemented a fully customizable Player and Ghost using MVCs, also used Scriptable object to maintain 
+- Implemented a fully customizable Player and Ghost using MVCs, also used Scriptable object to maintain 
 the data.
-− Used Observer Pattern to Implement Interaction System. 
-− Implemented simple timer system for ghost visibility as well as AI for Random Patrolling.
+- Used Observer Pattern to Implement Interaction System. 
+- Implemented simple timer system for ghost visibility as well as AI for Random Patrolling.
 
 # Video and Play
 
